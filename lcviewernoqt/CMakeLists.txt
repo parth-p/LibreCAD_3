@@ -31,6 +31,7 @@ drawitems/lcdimangular.cpp
 drawitems/lclwpolyline.cpp
 drawables/lccursor.cpp
 painters/createpainter.cpp
+painters/openglpainter.cpp
 documentcanvas.cpp
 managers/snapmanagerimpl.cpp
 managers/EventManager.cpp
@@ -72,6 +73,7 @@ events/selecteditemsevent.h
 events/snappointevent.h
 painters/lcpainter.h
 painters/createpainter.h
+painters/openglpainter.h
 painters/lccairopainter.tcc
 documentcanvas.h
 managers/snapmanager.h
@@ -88,6 +90,17 @@ drawitems/lcvinsert.h
 )
 
 find_package(PkgConfig)
+
+find_package(GLUT REQUIRED)
+include_directories(${GLUT_INCLUDE_DIRS})
+
+#OpenGL
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIR})
+
+#glew
+find_package(GLEW REQUIRED)
+include_directories(${GLEW_INCLUDE_DIRS})
 
 # Cairo
 pkg_check_modules(CAIRO REQUIRED cairo>=1.13)
@@ -130,4 +143,4 @@ else ()
 endif ()
 
 add_library(lcviewernoqt SHARED ${viewer_srcs} ${viewer_hdrs})
-target_link_libraries(lcviewernoqt ${CAIRO_LIBRARIES} ${PANGO_LIBRARIES} ${GDK-PIXBUF_LIBRARIES} ${GDK_LIBRARIES} lckernel)
+target_link_libraries(lcviewernoqt ${CAIRO_LIBRARIES} ${PANGO_LIBRARIES} ${GDK-PIXBUF_LIBRARIES} ${GDK_LIBRARIES} ${OPENGL_LIBRARY} ${GLEW_LIBRARIES} ${GLUT_LIBRARIES} lckernel)

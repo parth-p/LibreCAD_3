@@ -20,6 +20,7 @@
 #include "documentcanvas.h"
 
 #include "painters/createpainter.h"
+#include "painters/openglpainter.h"
 
 namespace LCViewer {
 class SnapManager;
