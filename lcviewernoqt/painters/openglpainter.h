@@ -9,7 +9,7 @@ namespace LCViewer {
 	class OpenGLPainter : public LcPainter {
 		public:
 			OpenGLPainter(unsigned int width, unsigned int height);
-
+			
 			void move_to(double x,double y) override;
 			void line_to(double x,double y) override;
 			void rectangle(double x,double y,double w,double h) override;
@@ -35,14 +35,14 @@ namespace LCViewer {
 			void user_to_device(double* x, double* y) override;
 			void device_to_user(double* x, double* y) override;
 			void user_to_device_distance(double* dx, double* dy) override;
-            void device_to_user_distance(double* dx, double* dy) override;
+			void device_to_user_distance(double* dx, double* dy) override;
             void new_path() override;
             void close_path() override;
             void new_sub_path() override;
             void rotate(double r) override;
             void arc(double x, double y, double r, double start, double end) override;
-	        void arcNegative(double x, double y, double r, double start, double end) override;
-	        void circle(double x, double y, double r) override;
+            void arcNegative(double x, double y, double r, double start, double end) override;
+            void circle(double x, double y, double r) override;
 	        void ellipse(double cx, double cy, double rx, double ry, double sa, double ea, double ra) override;
 	        void font_size(double size, bool deviceCoords) override;
 	        void select_font_face(const char* text_val) override;

@@ -15,7 +15,7 @@
 using namespace LCViewer;
 
 CadMdiChild::CadMdiChild(QWidget* parent) :
-    QWidget(parent),
+    QOpenGLWidget(parent),
     _activeLayer(nullptr) {
 
     if (this->objectName().isEmpty()) {

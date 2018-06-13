@@ -70,6 +70,8 @@ void OpenGLPainter::line_to(double x,double y) {
 }
 
 void OpenGLPainter::rectangle(double x,double y,double w,double h) {
+    glewInit();
+
     _path.clear();
     _path.emplace_back(x + w, y);
     _path.emplace_back(x + w, y + h);
@@ -89,8 +91,8 @@ void OpenGLPainter::rectangle(double x,double y,double w,double h) {
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,0,0);
+//    glEnableVertexAttribArray(0);
+//    glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,0,0);
     
     GLuint elements[] = {
         0, 1, 2,

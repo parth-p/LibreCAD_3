@@ -18,7 +18,8 @@
 #include <managers/dragmanager.h>
 
 #include "documentcanvas.h"
-
+#include <QtWidgets/QOpenGLWidget>
+#include <QtGui/QOpenGLWindow>
 #include "painters/createpainter.h"
 #include "painters/openglpainter.h"
 
@@ -59,7 +60,7 @@ struct MouseEvent {
     int scale;
 };
 
-class LCADViewer : public QWidget {
+class LCADViewer : public QOpenGLWidget {
         Q_OBJECT
 
     public:

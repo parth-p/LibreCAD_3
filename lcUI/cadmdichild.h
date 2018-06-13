@@ -31,7 +31,7 @@ extern "C"
 
 #include "lua-intf/LuaIntf/LuaIntf.h"
 
-class CadMdiChild : public QWidget {
+class CadMdiChild : public QOpenGLWidget {
         Q_OBJECT
 
     public:

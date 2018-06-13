@@ -5,7 +5,7 @@
 using namespace LCViewer;
 
 LCADViewer::LCADViewer(QWidget *parent) :
-    QWidget(parent),
+    QOpenGLWidget(parent),
     _docCanvas(nullptr),
     _mouseScrollKeyActive(false),
     _operationActive(false),
@@ -259,11 +259,11 @@ void LCADViewer::paintEvent(QPaintEvent *p) {
     QPainter painter(this);
 
     // _foregroundPainter->clear(1.0, 1.0, 1.0, 0.0);
-    // _docCanvas->render(*_foregroundPainter, VIEWER_FOREGROUND);
+    _docCanvas->render(*_foregroundPainter, VIEWER_FOREGROUND);
 
-    // painter.drawImage(QPoint(0, 0), *imagemaps.at(_backgroundPainter));
+    painter.drawImage(QPoint(0, 0), *imagemaps.at(_backgroundPainter));
     painter.drawImage(QPoint(0, 0), *imagemaps.at(_documentPainter));
-    // painter.drawImage(QPoint(0, 0), *imagemaps.at(_foregroundPainter));
+    painter.drawImage(QPoint(0, 0), *imagemaps.at(_foregroundPainter));
 
     painter.end();
 }
@@ -271,17 +271,17 @@ void LCADViewer::paintEvent(QPaintEvent *p) {
 void LCADViewer::createPainters(unsigned int width, unsigned int height) {
     QImage *m_image;
 
-    // m_image = new QImage(width, height, QImage::Format_ARGB32);
-    // _backgroundPainter = createCairoImagePainter(m_image->bits(), width, height);
-    // imagemaps.insert(std::make_pair(_backgroundPainter, m_image));
+    m_image = new QImage(width, height, QImage::Format_ARGB32);
+    _backgroundPainter = createCairoImagePainter(m_image->bits(), width, height);
+    imagemaps.insert(std::make_pair(_backgroundPainter, m_image));
 
     m_image = new QImage(width, height, QImage::Format_ARGB32);
     _documentPainter = createCairoImagePainter(m_image->bits(), width, height);
     imagemaps.insert(std::make_pair(_documentPainter, m_image));
 
-    // m_image = new QImage(width, height, QImage::Format_ARGB32);
-    // _foregroundPainter = createCairoImagePainter(m_image->bits(), width, height);
-    // imagemaps.insert(std::make_pair(_foregroundPainter, m_image));
+    m_image = new QImage(width, height, QImage::Format_ARGB32);
+    _foregroundPainter = createCairoImagePainter(m_image->bits(), width, height);
+    imagemaps.insert(std::make_pair(_foregroundPainter, m_image));
 }
 
 void LCADViewer::deletePainters() {
@@ -294,12 +294,12 @@ void LCADViewer::deletePainters() {
 }
 
 void LCADViewer::updateBackground() {
-    // _backgroundPainter->clear(1.0, 1.0, 1.0, 0.0);
-    // _docCanvas->render(*_backgroundPainter, VIEWER_BACKGROUND);
+    _backgroundPainter->clear(1.0, 1.0, 1.0, 0.0);
+    _docCanvas->render(*_backgroundPainter, VIEWER_BACKGROUND);
 }
 
 void LCADViewer::updateDocument() {
-    _documentPainter->clear(1.0, 1.0, 1.0, 0.0);
+    // _documentPainter->clear(1.0, 1.0, 1.0, 0.0);
     _docCanvas->render(*_documentPainter, VIEWER_DOCUMENT);
 }
 
